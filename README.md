@@ -1,6 +1,6 @@
 # Prerequisites
 
-Before beginning, install depedencies in root directory, `/2fa-api` and `/2fa-app`.
+Before beginning, install dependencies in root directory, `/2fa-api` and `/2fa-app`.
 
 # Start
 
