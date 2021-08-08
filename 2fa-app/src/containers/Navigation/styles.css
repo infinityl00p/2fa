@@ -1,0 +1,11 @@
+.navigation {
+  width: 100vw;
+  background-color: #008cba;
+  margin-left: -8px;
+  margin-top: -8px;
+}
+
+.navigation-list {
+  margin: 0;
+  list-style-type: none;
+}
