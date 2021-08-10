@@ -4,17 +4,16 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const cors = require("cors");
 require("./db").dbConnect();
-const logout = require("./handlers/logout");
-const login = require("./handlers/login");
-const verify = require("./handlers/verify");
-const create = require("./handlers/create");
+const authRouter = require("./routers/auth");
 const user = require("./handlers/user");
 require("dotenv").config();
 const PORT = 3001;
+const CORS_ORIGIN = "http://localhost:3000";
+const SESSION_SECRET = "secret";
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: CORS_ORIGIN,
     credentials: true,
     exposedHeaders: ["set-cookie"],
   })
@@ -22,7 +21,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(
   session({
-    secret: "secret",
+    secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -33,10 +32,7 @@ app.use(
   })
 );
 
-app.get("/auth/logout", logout.handler);
-app.post("/auth/login", login.handler);
-app.get("/auth/login/verify", verify.handler);
-app.post("/auth/create", create.handler);
+app.use("/auth", authRouter);
 app.get("/user", user.handler);
 
 app.listen(PORT, () => {

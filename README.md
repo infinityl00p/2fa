@@ -6,8 +6,8 @@ Before beginning, install dependencies in root directory, `/2fa-api` and `/2fa-a
 
 ## M1 Mac Processor
 
-`npm run start:dev`
+`npm run start:dev:m1`
 
 ## Intel Chip
 
-`npm run start:dev:m1`
+`npm run start:dev`
