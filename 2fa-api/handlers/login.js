@@ -30,9 +30,6 @@ const login = function (req, res) {
             throw new Error("Error: Duplicate user");
           }
 
-          // send success message
-          res.status(200).json(results[0]);
-
           // then send OTP text
           twilioClient.verify
             .services(process.env.TWILIO_SERVICE_SID)
@@ -45,7 +42,7 @@ const login = function (req, res) {
               throw new Error(error);
             });
 
-          return;
+          return res.status(200).json({ phone: results[0].phone });
         }
       );
     });
