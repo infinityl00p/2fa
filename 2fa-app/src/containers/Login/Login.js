@@ -21,7 +21,7 @@ export const Login = () => {
         password,
       })
       .then((response) => {
-        if (response.data.id && response.data.phone) {
+        if (response.status === 200 && response?.data?.phone) {
           history.push("/login/otp", { phone: response.data.phone });
         }
 
