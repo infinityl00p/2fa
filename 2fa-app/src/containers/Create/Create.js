@@ -39,6 +39,11 @@ export const Create = () => {
         phone,
       })
       .then((response) => {
+        console.log(
+          "🚀 ~ file: Create.js ~ line 42 ~ .then ~ response",
+          response
+        );
+
         if (response.data.loggedIn) {
           setUser(response.data.loggedIn);
           history.push("/");

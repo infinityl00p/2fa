@@ -1,8 +1,8 @@
-const user = function (req, res) {
+const user = function (req, res, next) {
   try {
     return res.status(200).json({ loggedIn: req.session.loggedIn });
   } catch (error) {
-    return res.status(500).json({ error: "Server Error" });
+    return next({ status: 500 });
   }
 };
 

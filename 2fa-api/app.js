@@ -5,6 +5,7 @@ const session = require("express-session");
 const cors = require("cors");
 require("./db").dbConnect();
 const authRouter = require("./routers/auth");
+const error = require("./handlers/error");
 const user = require("./handlers/user");
 require("dotenv").config();
 const PORT = 3001;
@@ -34,6 +35,7 @@ app.use(
 
 app.use("/auth", authRouter);
 app.get("/user", user.handler);
+app.use(error.handler);
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`);
