@@ -7,17 +7,17 @@ const create = function (req, res) {
     const { email } = req.body;
     const { password } = req.body;
     const { phone } = req.body;
+
     bcrypt.hash(password, process.env.BCRYPT_SALT, function (_, hash) {
       db.connection.query(
         `INSERT INTO Users (email, password, phone) VALUES ('${email}', '${hash}', '${phone}')`,
-        (error, results) => {
+        (error) => {
           if (error) {
-            console.log(error);
             return res.status(500).json({ error });
           }
 
           req.session.loggedIn = true;
-          return res.status(200).json({ data: { loggedIn: true, results } });
+          return res.status(200).json({ loggedIn: true });
         }
       );
     });
