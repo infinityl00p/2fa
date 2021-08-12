@@ -18,10 +18,10 @@ const verify = function (req, res) {
           .json({ isValid: req.session.loggedIn, sessionId: req.sessionID });
       })
       .catch((error) => {
-        throw new Error(error);
+        return next({ status: 503 });
       });
   } catch (error) {
-    return res.status(500).json({ error });
+    return next({ status: 500 });
   }
 };
 

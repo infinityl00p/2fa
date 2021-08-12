@@ -13,7 +13,7 @@ const create = function (req, res) {
         `INSERT INTO Users (email, password, phone) VALUES ('${email}', '${hash}', '${phone}')`,
         (error) => {
           if (error) {
-            return res.status(500).json({ error });
+            return next({ status: 500 });
           }
 
           req.session.loggedIn = true;
@@ -22,7 +22,7 @@ const create = function (req, res) {
       );
     });
   } catch (error) {
-    return res.status(500).json({ error });
+    return next({ status: 500 });
   }
 };
 
