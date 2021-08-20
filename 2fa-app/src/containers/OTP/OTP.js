@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
-import { LabelInput } from "../../components/LabelInput";
 import axios from "axios";
+import { useContext, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { AuthSetterContext } from "../../providers/AuthProvider/AuthProvider";
 import { Button } from "../../components/Button";
 import { Error } from "../../components/Error";
+import { LabelInput } from "../../components/LabelInput";
+import { AuthSetterContext } from "../../providers/AuthProvider/AuthProvider";
 
 export const OTP = () => {
   const location = useLocation();

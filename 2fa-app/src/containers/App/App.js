@@ -1,10 +1,10 @@
-import { BrowserRouter, Switch, Redirect, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth/useAuth";
-import { Login } from "../Login";
-import { OTP } from "../OTP";
 import { Authenticated } from "../Authenticated";
 import { Create } from "../Create";
+import { Login } from "../Login";
 import { Navigation } from "../Navigation";
+import { OTP } from "../OTP";
 import "./styles.css";
 
 const Router = () => {

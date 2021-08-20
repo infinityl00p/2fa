@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { LabelInput } from "../../components/LabelInput";
 import axios from "axios";
+import { useState } from "react";
+import { decodeToken } from "react-jwt";
+import { useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Error } from "../../components/Error";
-import { decodeToken } from "react-jwt";
+import { LabelInput } from "../../components/LabelInput";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

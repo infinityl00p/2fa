@@ -1,8 +1,8 @@
+import axios from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import { App } from "./containers/App";
 import { AuthProvider } from "./providers/AuthProvider";
-import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
