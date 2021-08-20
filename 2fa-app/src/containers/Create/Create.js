@@ -14,7 +14,7 @@ export const Create = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   let history = useHistory();
-  const { setUser } = useContext(AuthSetterContext);
+  const { setIsLoggedIn } = useContext(AuthSetterContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ export const Create = () => {
             "🚀 ~ file: Create.js ~ line 46 ~ .then ~ decodedToken",
             decodedToken
           );
-          setUser(decodedToken?.loggedIn || false);
+          setIsLoggedIn(decodedToken?.loggedIn || false);
           history.push("/");
         }
 

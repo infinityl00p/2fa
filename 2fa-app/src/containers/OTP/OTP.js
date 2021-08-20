@@ -10,7 +10,7 @@ export const OTP = () => {
   const location = useLocation();
   const [OTP, setOTP] = useState("");
   const [error, setError] = useState("");
-  const { setUser } = useContext(AuthSetterContext);
+  const { setIsLoggedIn } = useContext(AuthSetterContext);
   let history = useHistory();
 
   const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ export const OTP = () => {
       })
       .then((response) => {
         if (response.data.isValid) {
-          setUser(true);
+          setIsLoggedIn(true);
           history.push("/");
         }
         if (!response.data.isValid || response.data.error) {

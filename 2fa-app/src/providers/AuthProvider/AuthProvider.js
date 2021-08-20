@@ -5,9 +5,9 @@ export const AuthContext = createContext();
 export const AuthSetterContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const authValue = { user };
-  const authSetterValue = { setUser };
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const authValue = { isLoggedIn };
+  const authSetterValue = { setIsLoggedIn };
   const authToken = localStorage.getItem("authToken");
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
           },
         })
         .then((response) => {
-          setUser(response.data.loggedIn);
+          setIsLoggedIn(response?.data?.loggedIn || false);
         });
     }
   }, [authToken]);

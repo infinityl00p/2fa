@@ -4,11 +4,11 @@ import { AuthSetterContext } from "../../providers/AuthProvider";
 import "./styles.css";
 
 export const Authenticated = () => {
-  const { setUser } = useContext(AuthSetterContext);
+  const { setIsLoggedIn } = useContext(AuthSetterContext);
 
   const handleClick = () => {
     localStorage.removeItem("authToken");
-    setUser(false);
+    setIsLoggedIn(false);
   };
 
   return (

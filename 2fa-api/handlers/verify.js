@@ -10,7 +10,7 @@ const verify = function (req, res) {
     twilioClient.verify
       .services(process.env.TWILIO_SERVICE_SID)
       .verificationChecks.create({ to: `+1${phone}`, code: OTP })
-      .xthen((response) => res.status(200).json({ isValid: response.valid }))
+      .then((response) => res.status(200).json({ isValid: response.valid }))
       .catch(() => next({ status: 503 }));
   } catch (error) {
     return next({ status: 500 });
