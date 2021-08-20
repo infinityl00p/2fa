@@ -4,11 +4,13 @@ import { LabelInput } from "../../components/LabelInput";
 import axios from "axios";
 import { Button } from "../../components/Button";
 import { Error } from "../../components/Error";
+import { decodeToken } from "react-jwt";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   let history = useHistory();
 
   const handleSubmit = (e) => {
@@ -21,8 +23,10 @@ export const Login = () => {
         password,
       })
       .then((response) => {
-        if (response.status === 200 && response?.data?.phone) {
-          history.push("/login/otp", { phone: response.data.phone });
+        if (response.status === 200 && response?.data?.token) {
+          localStorage.setItem("authToken", response.data.token);
+          const decodedToken = decodeToken(response.data.token);
+          history.push("/login/otp", { phone: decodedToken?.phone });
         }
 
         if (response.data.error) {

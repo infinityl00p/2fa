@@ -1,6 +1,9 @@
 const bcrypt = require("bcrypt");
 const db = require("../db");
 const twilio = require("../twilio");
+const jwt = require("jsonwebtoken");
+const { ONE_WEEK } = require("../constants");
+
 require("dotenv").config();
 
 const twilioClient = twilio.twilioClient;
@@ -27,15 +30,21 @@ const login = function (req, res, next) {
               to: `+1${results[0].phone}`,
               channel: "sms",
             })
-            .then((verification) =>
-              res.status(200).json({ phone: results[0].phone })
-            )
-            .catch((error) => next({ status: 503 }));
+            .then(() => {
+              const token = jwt.sign(
+                { email, phone: results[0].phone },
+                process.env.JWT_TOKEN_SECRET,
+                { expiresIn: ONE_WEEK }
+              );
+
+              return res.status(200).json({ token });
+            })
+            .catch(() => next({ status: 503 }));
         }
       );
     });
   } catch (error) {
-    return next(error);
+    return next({ status: 500 });
   }
 };
 

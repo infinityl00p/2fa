@@ -1,8 +1,10 @@
 const bcrypt = require("bcrypt");
+const { ONE_WEEK } = require("../constants");
 const db = require("../db");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const create = function (req, res) {
+const create = function (req, res, next) {
   try {
     const { email } = req.body;
     const { password } = req.body;
@@ -16,8 +18,13 @@ const create = function (req, res) {
             return next({ status: 500 });
           }
 
-          req.session.loggedIn = true;
-          return res.status(200).json({ loggedIn: true });
+          const token = jwt.sign(
+            { loggedIn: true },
+            process.env.JWT_TOKEN_SECRET,
+            { expiresIn: ONE_WEEK }
+          );
+
+          return res.status(200).json({ token });
         }
       );
     });

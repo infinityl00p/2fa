@@ -8,12 +8,21 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const authValue = { user };
   const authSetterValue = { setUser };
+  const authToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    axios.get("http://localhost:3001/user").then((response) => {
-      setUser(response.data.loggedIn);
-    });
-  }, []);
+    if (authToken) {
+      axios
+        .get("http://localhost:3001/user", {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        })
+        .then((response) => {
+          setUser(response.data.loggedIn);
+        });
+    }
+  }, [authToken]);
 
   return (
     <AuthContext.Provider value={authValue}>

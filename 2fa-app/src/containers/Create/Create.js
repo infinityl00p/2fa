@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useContext, useState } from "react";
+import { decodeToken } from "react-jwt";
 import { useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Error } from "../../components/Error";
@@ -39,13 +40,14 @@ export const Create = () => {
         phone,
       })
       .then((response) => {
-        console.log(
-          "🚀 ~ file: Create.js ~ line 42 ~ .then ~ response",
-          response
-        );
-
-        if (response.data.loggedIn) {
-          setUser(response.data.loggedIn);
+        if (response?.data?.token) {
+          localStorage.setItem("authToken", response.data.token);
+          const decodedToken = decodeToken(response.data.token);
+          console.log(
+            "🚀 ~ file: Create.js ~ line 46 ~ .then ~ decodedToken",
+            decodedToken
+          );
+          setUser(decodedToken?.loggedIn || false);
           history.push("/");
         }
 
