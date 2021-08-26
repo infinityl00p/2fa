@@ -1,0 +1,15 @@
+.navItem {
+  display: inline-block;
+  padding: 10px;
+}
+
+.navItem:hover > a {
+  color: red;
+  cursor: pointer;
+}
+
+.navItem > a {
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+}
