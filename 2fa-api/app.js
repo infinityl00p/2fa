@@ -6,6 +6,7 @@ require("./db").dbConnect();
 const authRouter = require("./routers/auth");
 const error = require("./handlers/error");
 const user = require("./handlers/user");
+const { initUserModel } = require("./models/user");
 require("dotenv").config();
 const PORT = 3001;
 const CORS_ORIGIN = "http://localhost:3000";
@@ -18,6 +19,7 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+initUserModel();
 
 app.use("/auth", authRouter);
 app.get("/user", user.handler);
